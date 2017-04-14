@@ -1,0 +1,167 @@
+server.c
+
+
+#include <stdio.h>
+
+#include <sys/socket.h>
+
+#include <arpa/inet.h>
+#include <stdlib.h>
+
+#include <string.h>
+#include <unistd.h>
+
+#define ECHOMAX 255
+int main(int argc, char *argv[])
+
+{
+        int sock;
+
+        struct sockaddr_in echoServAddr;
+
+        struct sockaddr_in echoClntAddr;
+
+        unsigned int cliAddrLen;
+
+        char echoBuffer[ECHOMAX];
+
+        unsigned short echoServPort;
+
+        int recvMsgSize;
+
+        if(argc==2){
+
+                echoServPort = atoi(argv[1]);
+
+        }else{
+
+                echoServPort = 21001;
+
+        }
+
+        printf("port number = %d\n",echoServPort);
+
+        printf("server address = 0\n");
+
+        if ((sock = socket(PF_INET, SOCK_DGRAM, 0)) < 0){
+
+                printf("socket() failed.\n");
+
+        }
+
+        memset(&echoServAddr, 0, sizeof(echoServAddr));
+
+        echoServAddr.sin_family = AF_INET;
+
+        echoServAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+        echoServAddr.sin_port =htons(echoServPort);
+
+        if ((bind(sock, (struct sockaddr *) &echoServAddr,sizeof(echoServAddr))) < 0){
+
+                printf("bind() failed.\n");
+
+        }
+
+        printf("%s: waiting for data on port UDP 1500\n",argv[0]);
+
+        while(1){
+
+                cliAddrLen = sizeof(echoClntAddr);
+
+                if ((recvMsgSize = recvfrom(sock, echoBuffer, ECHOMAX,0,(struct sockaddr *) &echoClntAddr, &cliAddrLen)) < 0){
+
+                        printf("recvfrom() failed.\n");
+
+                }
+
+                printf("%s: from %s:UDP%d : %s\n",argv[0],inet_ntoa(echoClntAddr.sin_addr),echoClntAddr.sin_port,echoBuffer);
+
+                memset(echoBuffer,'\0',sizeof(echoBuffer));
+
+	}
+}
+client.c
+:
+#include <stdio.h>
+
+#include <sys/socket.h>
+
+#include <arpa/inet.h>
+
+#include <stdlib.h>
+
+#include <string.h>
+
+#include <unistd.h>
+
+#define ECHOMAX 255
+int main(int argc,char *argv[]){
+
+        int sock;
+
+        struct sockaddr_in echoServAddr;
+
+        struct sockaddr_in fromAddr;
+
+        unsigned short echoServPort;
+
+        unsigned int fromSize;
+
+        char *servIP;
+
+        char *echoString;
+
+        char echoBuffer[ECHOMAX+1];
+
+        int echoStringLen;
+
+        int respStringLen;
+
+        echoServPort = 19998;
+
+        servIP = argv[1];
+        printf("%s: sending data to '%s' (IP : %s)\n",argv[0],argv[1],argv[1]);
+
+        int j=0;
+
+        if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0){
+
+                        printf("socket() failed.\n");
+
+                }
+
+        for(j=2;j<argc;j++){
+
+                echoString = argv[j];
+
+                if ((echoStringLen = strlen(echoString)) > ECHOMAX){
+
+                        printf("Echo word too long.\n");
+
+                }
+
+                memset(&echoServAddr, 0, sizeof(echoServAddr));
+
+                echoServAddr.sin_family = AF_INET;
+
+                echoServAddr.sin_addr.s_addr = inet_addr(servIP);
+
+                echoServAddr.sin_port = htons(echoServPort);
+
+                if ((sendto(sock, echoString, echoStringLen, 0,(struct sockaddr *) &echoServAddr, sizeof(echoServAddr)))!= echoStringLen){
+
+                        printf("sendto() sent a different number of bytes than expected.\n");
+
+                }
+
+                echoString=NULL;
+
+        }
+
+        close(sock);
+
+        exit(0);
+
+
+}
