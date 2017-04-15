@@ -1,7 +1,6 @@
 <h1> 银行管理系统</h1>
 ---
 <h2>1.程序流程</h2>
-
 <ul>
     <li> Home(主界面）</li>
         <ul>
@@ -118,7 +117,9 @@
 ---
 <h1>Linux UDP下Client/Server传输多个字符串</h1>
 ---
+
 <h2>Server</h2>
+
 * vi server.c
 * gcc server.c -o server
 * ./server 1800(client的端口号自己改）
