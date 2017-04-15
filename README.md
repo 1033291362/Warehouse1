@@ -1,6 +1,6 @@
-#银行管理系统
+<h1> 银行管理系统</h1>
 ---
-##1.程序流程
+<h2>1.程序流程</h2>
 
 <ul>
     <li> Home(主界面）</li>
@@ -30,7 +30,7 @@
     
 </ul>
 
-##2.程序要求
+<h2>2.程序要求</h2>
 
 * 案例研究：简单的银行系统
 * 您将需要使用敏捷方法开发一个简单的银行系统，从需求到分析/设计，实施和测试，遵循讲座中概述的指导方针和活动。
@@ -73,7 +73,7 @@
 
 
 
-##3.有问题反馈
+<h2>3.有问题反馈</h2>
 在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
 
 * 邮件(wangtianyou#bupt.edu.cn, 把#换成@)
@@ -82,7 +82,7 @@
 
 
 
-##4.关于代码（部分）
+<h2>4.关于代码（部分）</h2>
 
 ```javascript 
     private void Regest(String acc,String a, String b, String c, String  d,String e) throws IOException{
@@ -116,3 +116,13 @@
 		}
 ```
 ---
+<h1>Linux UDP下Client/Server传输多个字符串</h1>
+---
+<h2>Server</h2>
+* vi server.c
+* gcc server.c -o server
+* ./server 1800(client的端口号自己改）
+<h2>Client</h2>
+* vi client.c
+* gcc client.c -o client
+* ./client 127.0.0.1 xxx xx xxxx(可以了）
