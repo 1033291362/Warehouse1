@@ -123,7 +123,9 @@
 * vi server.c
 * gcc server.c -o server
 * ./server 1800(client的端口号自己改）
+
 <h2>Client</h2>
+
 * vi client.c
 * gcc client.c -o client
 * ./client 127.0.0.1 xxx xx xxxx(可以了）
