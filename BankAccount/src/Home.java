@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,18 +19,8 @@ import java.awt.Color;
 
 
 public class Home extends JFrame {
-
 	private JPanel contentPane;
-
-
 	public static void main(String[] args) {
-//		FileOutStream fileStream = new FileOutStream("regist.txt");
-//		try{
-//			FileWriter writer = new FileWriter("Regest.txt");
-//			writer.close();
-//		}catch(IOException ex){
-//			ex.printStackTrace();
-//		}
 		final Home frame = new Home();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,7 +32,6 @@ public class Home extends JFrame {
 			}
 		});
 	}
-
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
@@ -80,7 +68,7 @@ public class Home extends JFrame {
 		label.setBounds(196, 25, 171, 62);
 		panel.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Œ¢»Ì—≈∫⁄", Font.BOLD, 24));
+		label.setFont(new Font("√é¬¢√à√≠√ë√Ö¬∫√ö", Font.BOLD, 24));
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
@@ -94,7 +82,7 @@ public class Home extends JFrame {
 		bank.addActionListener(new BankListener());
 		deposit.addActionListener(new depositListener());
 		
-		setLocationRelativeTo(null);//æ”÷–
+		setLocationRelativeTo(null);//¬æ√ì√ñ√ê
 
 	}//depositListener
 	public class depositListener implements ActionListener{
